@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class DefenseUnit : MonoBehaviour
 {
-    private bool touchTower = false;
+    protected bool touchTower = false;
     public static int MaxHealth{get; set;}
     private int currentUnitHealth;
-    public float AtkSpeed { get; set; }
+    public float AtkSpeed { get; set; } // atk speed
+    public int Damage { get; set; }
+    protected Vector3 movement;
 
     protected void Start()
     {
@@ -28,21 +30,14 @@ public class DefenseUnit : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "EnemyTower")
-        {
-            touchTower = true;
-        }
 
     }
 
     // move object to right / left relatively to tags (ally, enemy)
-    protected void Move()
+    protected virtual void Move()
     {
-        // Define the direction of the movement
-        Vector3 movement = Vector3.right * Time.deltaTime * 2f; // Move right with speed and frame-independent movement
-
         // Apply the translation
         transform.Translate(movement);
     }

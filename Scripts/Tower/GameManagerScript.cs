@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // check health and win condition
 public class GameManagerScript : MonoBehaviour
@@ -31,6 +32,13 @@ public class GameManagerScript : MonoBehaviour
         EndGameScreen.SetActive(true);        
         gameStatus.text = "You win!";
         Time.timeScale = 0f;
+    }
+    
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("SampleScene");
+        IngameUIManager.gold = 10000;
     }
 
     void TeamBWins()
